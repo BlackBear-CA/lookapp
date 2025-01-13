@@ -1,0 +1,83 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align everything to the left */
+    padding: 20px 40px;
+    border-bottom: 1px solid #ccc;
+    gap: 30px; /* Add space between the logo and the nav menu */
+}
+
+.logo a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Ensure the text color matches the surrounding text */
+    display: flex; /* Ensure proper alignment */
+    cursor: pointer; /* Show a pointer cursor to indicate it's clickable */
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.logo a:hover {
+    text-decoration: none; /* Prevent underline on hover */
+}
+
+.nav {
+    display: flex;
+    gap: 30px; /* Space between nav menu items */
+    align-items: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.nav a {
+    color: #000;
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif; /* Apply Quicksand font */
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #007bff; /* Change color on hover */
+}
+/* Account Owner Icon */
+.account-icon {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6A1B9A; /* Default background color */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.account-icon img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.account-icon img:hover {
+    transform: scale(1.1);
+}

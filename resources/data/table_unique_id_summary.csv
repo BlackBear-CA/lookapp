@@ -1,0 +1,9 @@
+table_name,unique_id
+inventory_data,INV-0001
+item_category,CAT-0001
+logistics_data,LOG-0001
+maintenance_data,MPA-0001
+material_data,MAT-0001
+p2p_data,P2P-0001
+req_internal_data,REQ-0001
+warehouse_data,WAR-0001

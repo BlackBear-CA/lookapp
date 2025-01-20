@@ -2,14 +2,15 @@ from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import requests
 import io
+import os
 
 app = Flask(__name__)
 
-# Azure Blob Storage URLs and SAS tokens
-MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
-MATERIAL_SAS_TOKEN = "?st=2025-01-16T08%3A11%3A49Z&se=2025-02-01T00%3A11%3A49Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=fmdlHhltCU4vNmLvnzPTbC0inmHLqO03pUW0U0AQrvE%3D"
-IMAGE_BASE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/image-product"
-IMAGE_SAS_TOKEN = "?sv=2023-08-03&se=2025-01-23T20%3A17%3A52Z&sr=c&sp=rwl&sig=f6OLpFNTdOMV5l5zRGWHSnu2phTP9odsIsPG9bDv1Gc%3D"
+# Azure Blob Storage URLs and SAS tokens are fetched from environment variables
+MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
+MATERIAL_SAS_TOKEN = os.getenv("MATERIAL_SAS_TOKEN", "?st=2025-01-16T08%3A11%3A49Z&se=2025-02-01T00%3A11%3A49Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=fmdlHhltCU4vNmLvnzPTbC0inmHLqO03pUW0U0AQrvE%3D")
+IMAGE_BASE_URL = os.getenv("IMAGE_BASE_URL", "https://cs210032003bbb220fc.blob.core.windows.net/image-product")
+IMAGE_SAS_TOKEN = os.getenv("IMAGE_SAS_TOKEN", "?sv=2023-08-03&se=2025-01-23T20%3A17%3A52Z&sr=c&sp=rwl&sig=f6OLpFNTdOMV5l5zRGWHSnu2phTP9odsIsPG9bDv1Gc%3D")
 
 # Helper function to fetch material data from Azure Blob Storage
 def fetch_material_data():
@@ -88,4 +89,6 @@ def item_overview():
     return render_template('item_overview.html', **item_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use the PORT environment variable assigned by Azure
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

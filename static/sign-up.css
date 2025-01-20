@@ -1,0 +1,192 @@
+/* General Styles for Sign-Up Page */
+body {
+    display: flex; /* Add this to enable flexbox alignment */
+    height: 100vh;
+    background-color: #f9f9f9;
+    background-image: radial-gradient(circle, #b6b1b1 1px, transparent 1px);
+    background-size: 20px 20px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    align-items: center; /* Centers items vertically */
+    justify-content: center; /* Centers items horizontally */
+    flex-direction: column; /* Arranges items in a column */
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+/* Logo Image Styling */
+.logo-image {
+    position: absolute; /* Position the logo absolutely */
+    top: 8px; /* Vertical position */
+    left: 16px; /* Horizontal position */
+    display: flex; /* Center content inside the logo container */
+    justify-content: center;
+    align-items: center;
+    width: 80px; /* Adjust container size */
+    height: 80px; /* Adjust container size */
+    background: linear-gradient(135deg, #007bff, #fff); /* Gradient background */
+    border-radius: 50%; /* Circular background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for emphasis */
+    z-index: 10; /* Ensure it stays above other elements */
+    cursor: pointer; /* Optional: Add pointer cursor for interactivity */
+  }
+  
+  .logo-image img {
+    width: 54px; /* Match the size to the logo text */
+    height: 54px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Slight rounding for consistency */
+  }
+
+/* Sign-Up Form Styles */
+.signup-container {
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Light gradient */
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    border-left: 4px solid #007bff; /* Accent color */
+}
+
+.signup-box h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #007bff; /* Accent text color */
+}
+
+.form-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Softer corners */
+    background-color: rgba(0, 0, 0, 0.05); /* Light gray with transparency */
+    color: #333;
+    font-size: 16px;
+}
+
+.signup-button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* Alternative Sign-Up Options */
+.alternative-signup p {
+    margin: 20px 0 10px;
+    font-size: 14px;
+    color: #444;
+}
+
+.social-signup-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.social-signup-button:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); /* Lift effect */
+}
+
+.social-signup-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Specific Styling for Google Button */
+.google-login {
+    color: #000;
+}
+
+/* Specific Styling for Microsoft Button */
+.microsoft-login {
+    color: #000;
+}
+
+
+/* Corrected SSO Login Button */
+.sso-login {
+    background-color: #000; /* Added missing semicolon */
+    color: #fff;
+}
+
+.sso-login:hover {
+    background-color: #555;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: #666; /* Darker gray for better visibility */
+    opacity: 1; /* Ensures full opacity */
+}
+
+
+/* Link to Login Page */
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+
+.login-link a {
+    color: #007bff !important; /* Ensures it overrides other styles */
+    text-decoration: none !important;
+    font-weight: bold;
+    cursor: pointer; /* Pointer to show it's clickable */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.login-link a:hover {
+    text-decoration: underline !important; /* Ensures underline appears on hover */
+    color: #0056b3 !important; /* Slightly darker blue for hover */
+    transform: scale(1.05); /* Adds a subtle enlargement effect */
+}
+

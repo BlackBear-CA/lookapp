@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lookapp</title>
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Link to Header Styles -->
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/main header_style.css">
+    <!-- Link to Dashboard Styles -->
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/home_dashboard.css">
+    <!-- Link to Chat Box Styles -->
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/home_chat.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/home.html"><h1>lookapp</h1></a>
+        </div>
+        <nav class="nav">
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/home.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_home.png" alt="Home Icon" class="nav-icon"> Home
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_search_24dp_UNDEFINED_FILL0_wght400_GRAD0_opsz24.svg" alt="Explore Icon" class="nav-icon"> Explore
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/submit request.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_quote-request.png" alt="Request Icon" class="nav-icon"> Submit a Request
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/subscribe to alerts.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_notification.png" alt="Alerts Icon" class="nav-icon"> Subscribe to Alerts
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/join community.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_network.png" alt="Community Icon" class="nav-icon"> Join the Community
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/support.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_telephone.png" alt="Support Icon" class="nav-icon"> 24/7 Support
+            </a>
+
+             <!-- User Account Menu -->
+        <div class="user-account">
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_person_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt="User Icon" class="user-icon">
+            <div class="dropdown-content">
+                <a href="D:/lookapp-project/pages/profile.html">Profile</a>
+                <a href="D:/lookapp-project/pages/settings.html">Settings</a>
+                <a href="D:/lookapp-project/pages/logout.html">Logout</a>
+            </div>
+        </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="menu-item active">
+                <span class="material-icons">dashboard</span> Dashboard
+            </div>
+            <div class="menu-item">
+                <span class="material-icons">mail_outline</span> Messages / Inbox
+            </div>
+            <div class="menu-item">
+                <span class="material-icons">assignment</span> My Requests
+            </div>
+            <div class="menu-item">
+                <span class="material-icons">view_list</span> Catalog Highlights
+            </div>
+            <div class="menu-item">
+                <span class="material-icons">settings</span> Settings
+            </div>
+            <div class="menu-item logout">
+                <span class="material-icons">logout</span> Logout
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- User Greeting -->
+            <div class="user-greeting">
+                <h1>Welcome Back, Franklin Chong!</h1> <!-- Placeholder name -->
+            </div>
+
+            <!-- Announcements Section -->
+            <div class="section announcements">
+                <h2>Announcements</h2>
+                <div class="announcement-card">
+                    <h3>System Updates</h3>
+                    <p>Scheduled maintenance on Jan 20th.</p>
+                </div>
+                <div class="announcement-card">
+                    <h3>New Feature Release</h3>
+                    <p>Explore the advanced search feature now available.</p>
+                </div>
+            </div>
+        
+            <!-- Your Search History Section -->
+            <div class="section search-history">
+                <h2>Your Search History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>SKU</th>
+                            <th>MFG Part Nos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Harness</td>
+                            <td>10006</td>
+                            <td>1101254C</td>
+                        </tr>
+                        <tr>
+                            <td>Impeller Pump</td>
+                            <td>10271</td>
+                            <td>SPEMGS4-004-S</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+<!-- Analytics Section -->
+<div class="analytics">
+    <h2>Analytics</h2>
+    <div class="metrics-container">
+        <div class="metrics-card">
+            <h3>New Material Created</h3>
+            <p class="count">Count: <span>35</span></p>
+            <p class="value">Value: <span>$16,788.55</span> <span class="trend-up">5%</span></p>
+            <p>Today: 10 | Yesterday: 8</p>
+        </div>
+        <div class="metrics-card">
+            <h3>Non-Moving SKUs</h3>
+            <p class="count">Count: <span>9866</span></p>
+            <p class="value">Value: <span>$13,988,622.37</span> <span class="trend-down">2%</span></p>
+            <p>Today: 5 | Yesterday: 7</p>
+        </div>
+        <div class="metrics-card">
+            <h3>Surplus</h3>
+            <p class="count">Count: <span>1742</span></p>
+            <p class="value">Value: <span>$8,741,225.68</span> <span class="trend-up">3%</span></p>
+            <p>Today: 15 | Yesterday: 12</p>
+        </div>
+        <div class="metrics-card">
+            <h3>Obsolete</h3>
+            <p class="count">Count: <span>980</span></p>
+            <p class="value">Value: <span>$2,763,455.12</span> <span class="trend-down">1%</span></p>
+            <p>Today: 2 | Yesterday: 3</p>
+        </div>
+    </div>
+</div>
+         
+            <!-- Most Searched SKUs Section -->
+            <div class="section most-searched-skus">
+                <h2>Most Searched SKUs</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Description</th>
+                            <th>Search Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10005</td>
+                            <td>PLUG;EAR;SAFETY;DISPOSABLE;CORDLESS;HLEIGHT;LL1</td>
+                            <td>155</td>
+                        </tr>
+                        <tr>
+                            <td>10269</td>
+                            <td>FILTER;PRIMARY;AIR;ELEMENT;DONALDSON;P182040</td>
+                            <td>116</td>
+                        </tr>
+                        <tr>
+                            <td>10008</td>
+                            <td>SOAPSTONE;MARKER;MARKAL;80129</td>
+                            <td>89</td>
+                        <tr>   
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Activity Feed Section -->
+            <div class="section activity-feed">
+                <h2>Activity Feed</h2>
+                <ul>
+                    <li>Material request submitted on Jan 15th</li>
+                    <li>Last login: Jan 14th</li>
+                    <li>Profile updated: Jan 13th</li>
+                </ul>
+            </div>
+        </div>
+        
+
+    <div class="chat-button-container">
+        <div class="chat-button">
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/vector_bubble-chat.png" alt="Chat Icon" class="chat-icon">
+            <span class="chat-text">Let's Chat!</span>
+        </div>
+        <div class="chat-popup">
+            <div class="chat-placeholder">
+                <p id="animated-message"></p> <!-- Placeholder for the animated text -->
+            </div>            
+            <textarea placeholder="Type your message here..." class="chat-input"></textarea>
+            <button class="send-button">Send</button>
+        </div>
+    </div>
+    
+    <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/home_chat.js"></script>
+</body>
+</html>

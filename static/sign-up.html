@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/sign-up.css">
+</head>
+<body>
+
+    <!-- Logo Image -->
+    <div class="logo-image">
+        <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/logo_light-eyeglasses-.png" alt="Eyeglasses Logo">
+    </div>
+
+
+    <!-- Logo and Header -->
+    <header>
+        <div class="logo-text">
+            <h1>lookapp</h1>
+        </div>
+    </header>
+
+    <!-- Sign-Up Form Section -->
+    <main class="signup-container">
+        <div class="signup-box">
+            <h2>Create an Account</h2>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company name" required>
+                </div>
+                <button type="submit" class="signup-button">Sign Up</button>
+            </form>
+            <div class="alternative-signup">
+                <p>Or sign up with:</p>
+                <!-- Microsoft Sign-Up Button -->
+                <button class="social-signup-button microsoft-login">
+                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/logo_microsoft.png" alt="Microsoft Logo">
+                    Sign Up with Microsoft
+                </button>
+                <!-- Google Sign-Up Button -->
+                <button class="social-signup-button google-login">
+                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/logo_google.png" alt="Google Logo">
+                    Sign Up with Google
+                </button>
+                <!-- SSO Sign-Up Button -->
+                <button class="social-signup-button sso-login">
+                    Sign Up with SSO
+                </button>
+            </div>
+            <p>Already have an account? <a id="login-link">Log in</a></p>
+            </div>
+
+<script>
+    document.getElementById('login-link').addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.href = "https://cs210032003bbb220fc.blob.core.windows.net/$web/sign-in.html";
+    });
+</script>
+
+        </div>
+    </main>
+    
+</body>
+</html>

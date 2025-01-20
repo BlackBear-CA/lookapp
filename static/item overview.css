@@ -1,0 +1,329 @@
+/* General body styling with dotted background */
+html, body {
+    height: 100%;
+    background-color: #ffffff; /* White background */
+    background-image: radial-gradient(circle, #C2E7D6 1px, transparent 1px); /* Mint green dots */
+    background-size: 20px 20px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #0B0B0B; /* Dark text */
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 30px;
+    background-color: #0B0B0B; /* Dark black */
+    color: #C2E7D6; /* Mint green text */
+    border-bottom: 2px solid #C2E7D6; /* Mint green border */
+}
+
+/* Wrapper for the search bar */
+.search-wrapper {
+    position: absolute; /* Position it relative to its parent */
+    top: 20px; /* Adjust top alignment */
+    right: 20px; /* Align it to the right within the nav bar */
+    display: flex;
+    align-items: center;
+    border: 1px solid #C2E7D6; /* Mint green border */
+    border-radius: 50px; /* Rounded edges */
+    background-color: #ffffff; /* White background */
+    width: 30%; /* Adjust width */
+    max-width: 400px; /* Prevent it from being too wide */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 5px;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* Search Icon Styling */
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    color: #666; /* Gray icon color */
+    font-size: 1.2rem;
+}
+
+/* Search Input Styling */
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: #0B0B0B; /* Dark text */
+}
+
+/* Search Button Styling */
+.search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #C2E7D6; /* Mint green text */
+    background-color: #0B0B0B; /* Dark black background */
+    border: none;
+    border-radius: 50px; /* Rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #C2E7D6; /* Mint green hover */
+    color: #0B0B0B; /* Dark text */
+}
+
+/* Breadcrumb styling */
+.breadcrumbs {
+    margin: 20px 40px;
+    font-size: 16px;
+    color: #555;
+    text-transform: capitalize;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #0B0B0B; /* Mint green links */
+}
+
+.breadcrumbs a:hover {
+    color: #0B0B0B; /* Dark text */
+}
+
+.breadcrumbs span {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Action Links Container */
+.action-links {
+    display: flex; /* Align the links horizontally */
+    justify-content: flex-start; /* Align links to the left */
+    align-items: center; /* Center align vertically within the container */
+    gap: 20px; /* Space between the links */
+    padding: 10px 0; /* Add vertical padding */
+    position: absolute; /* Allow precise positioning */
+    top: 90px; /* Align with the breadcrumbs */
+    left: 800px; /* Align to the left of the breadcrumbs */
+    width: auto; /* Automatically size the container based on content */
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Individual Link Styling */
+.notifications-link, .request-link {
+    display: flex; /* Align icon and text in each link */
+    align-items: center; /* Center-align vertically */
+    gap: 10px; /* Space between icon and text */
+    padding: 10px; /* Padding inside each link */
+    border: 2px solid #ddd; /* Light border around links */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #ffffff; /* White background for clarity */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+}
+
+/* Icon Styling */
+.action-icon {
+    width: 30px; /* Fixed width for the icons */
+    height: 30px; /* Fixed height for the icons */
+}
+
+/* Text Styling */
+.notifications-link span, .request-link span {
+    font-size: 1rem; /* Standard font size */
+    font-weight: bold; /* Bold text for emphasis */
+    color: #333; /* Neutral text color */
+}
+
+/* Hover Effect for Links */
+.notifications-link:hover, .request-link:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+}
+
+/* Styling for the Manufacturer and Part Number Section */
+.manufacturer-details {
+    position: absolute; /* Allows precise positioning */
+    top: 425px; /* Adjust to align underneath SKU items */
+    left: 930px; /* Center horizontally */
+    transform: translateX(-50%); /* Center align correction */
+    width: auto; /* Adjust the table width automatically */
+    max-width: 800px; /* Set a maximum width */
+    margin: 0 auto; /* Center the section */
+}
+
+/* Table Styling */
+.details-table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Remove double borders */
+    font-family: 'Quicksand', sans-serif; /* Use consistent font */
+    font-size: 14px; /* Adjust font size */
+    margin: 0 auto; /* Center the table within the container */
+}
+
+/* Table Header Styling */
+.details-table th {
+    background-color: #f4f4f4; /* Light gray background */
+    color: #000; /* Dark text color */
+    text-transform: uppercase; /* Capitalize text */
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc; /* Add borders */
+}
+
+/* Table Body Styling */
+.details-table td {
+    padding: 10px;
+    border: 1px solid #ccc; /* Add borders */
+    text-align: center; /* Center-align table content */
+}
+
+/* Alternating Row Colors */
+.details-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd rows */
+}
+
+.details-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+
+/* Image Reference Section */
+.image-reference {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto; /* Adjust spacing */
+    padding: 20px;
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* Light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 300px; /* Restrict width for the circle area */
+    height: 300px; /* Make it look proportional */
+    position: absolute; /* Use absolute positioning to place it in the desired area */
+    top: 200px; /* Bring the section up by 50px */
+    left: 290px; /* Adjust the left value to position it horizontally */
+}
+
+/* Styling for the image within the container */
+.image-reference .item-image img {
+    max-width: 100%;
+    max-height: 100%; /* Prevent overflow */
+    display: block;
+    margin: auto;
+    object-fit: cover; /* Ensures the image fits within the circle */
+    transition: transform 0.3s ease; /* Add a hover effect */
+}
+
+/* Optional hover effect for the image */
+.image-reference .item-image img:hover {
+    transform: scale(1.05); /* Slight zoom-in on hover */
+}
+
+/* Status Container Styling */
+.status-container {
+    display: flex; /* Use flexbox for inline alignment */
+    justify-content: flex-start; /* Add space between boxes */
+    align-items: center; /* Center-align items vertically */
+    flex-wrap: wrap; /* Ensure boxes wrap if they exceed the container width */
+    width: 800px; /* Adjust width to fit the red rectangle */
+    height: 100px; /* Adjust height based on red rectangle */
+    position: absolute; /* Position the container absolutely */
+    top: 520px; /* Adjust to align with the top of the red rectangle */
+    left: 800px; /* Adjust to align horizontally in the red rectangle */
+    background-color: transparent; /* Ensure no background color */
+    gap: 2px; /* Set the gap between boxes to 2px */
+    padding: 0; /* Remove container padding */
+    margin: 0; /* Remove container margin */
+}
+
+/* Status Box Styling */
+.status-box {
+    width: 120px;
+    height: 120px; /* Fix height for uniformity */
+    margin: 0px; /* Add spacing between boxes */
+    padding: 8px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    display: flex; /* Use flexbox for content alignment inside each box */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover transition */
+}
+
+/* Number Span Styling */
+.status-box span {
+    display: inline-block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000; /* Blue color for emphasis */
+}
+
+/* Description Paragraph Styling */
+.status-box p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Hover Effect */
+.status-box:hover {
+    transform: translateY(-5px); /* Add hover lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .item-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .status-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Barcode Section Styling */
+.barcode-section {
+    position: absolute;
+    top: 660px; /* Adjust to align under the status boxes */
+    left: 100px; /* Align to the left */
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: center; /* Center the barcode within the container */
+    align-items: center; /* Align items vertically */
+    margin-top: 20px;
+}
+
+.barcode-container {
+    text-align: center;
+    background-color: #fff; /* Optional: add background color */
+    border: 1px solid #ddd; /* Optional: border around the barcode */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#barcode-image {
+    width: 500px; /* Maintain aspect ratio */
+    height: auto; /* Adjust height for barcode strip */
+    margin-bottom: 10px;
+}
+
+#barcode-text {
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+

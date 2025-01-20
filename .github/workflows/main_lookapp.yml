@@ -37,11 +37,14 @@ jobs:
       - name: Package application
         run: zip release.zip ./* -r -x "venv/*"
 
-      # Step 4: Login to Azure using Service Principal
+      # Step 4: Login to Azure using OIDC
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          auth-type: federated
 
       # Step 5: Deploy static files
       - name: Deploy static files

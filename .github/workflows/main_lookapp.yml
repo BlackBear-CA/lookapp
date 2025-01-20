@@ -33,28 +33,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Step 3: Run tests (optional)
-      # Uncomment the following section if you have tests to run
-      # - name: Run tests
-      #   run: pytest
-
-      # Step 4: Zip the application for deployment
+      # Step 3: Package the application for deployment
       - name: Package application
         run: zip release.zip ./* -r -x "venv/*"
 
-      # Step 5: Login to Azure
+      # Step 4: Login to Azure using OIDC
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_264E190F46954F3FB12E12BE5D9F9B70 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B6A48E0380924A43A360AF80F427421A }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_247B62E695784804A46D900278D9D0C8 }}
-          auth-type: "SERVICE_PRINCIPAL"
-          enable-AzPSSession: false
-          environment: azurecloud
-          audience: api://AzureADTokenExchange
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-oidc: true
 
-      # Step 6: Deploy static files
+      # Step 5: Deploy static files
       - name: Deploy static files
         uses: azure/webapps-deploy@v3
         with:
@@ -62,7 +54,7 @@ jobs:
           slot-name: 'Production'
           package: './static'
 
-      # Step 7: Deploy backend code
+      # Step 6: Deploy backend code
       - name: Deploy backend code
         uses: azure/webapps-deploy@v3
         with:
@@ -70,7 +62,7 @@ jobs:
           slot-name: 'Production'
           package: './app'
 
-      # Step 8: Final deploy artifact to Azure Web App
+      # Step 7: Deploy the app zip
       - name: Deploy the app
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp

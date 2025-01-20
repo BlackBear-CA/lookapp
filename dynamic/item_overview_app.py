@@ -1,20 +1,20 @@
 import pandas as pd
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, Response, jsonify
 import requests
 import io
 import os
 
 app = Flask(__name__)
 
-# Azure Blob Storage URL and SAS token for the new data source
-MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
-SAS_TOKEN = os.getenv("SAS_TOKEN", "?se=2025-02-28T23%3A59%3A59Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=6gHA4BclcjFikr9Na3srpUA5RCvdX%2FyNAiJcdMhdEf0%3D")
+# Azure Blob Storage URLs
+MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
+STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html"
 
 # Load material data from Azure Blob Storage
 def load_material_data():
     try:
         print(f"Fetching data from: {MATERIAL_DATA_URL}")  # Debugging: Confirm URL
-        response = requests.get(MATERIAL_DATA_URL + SAS_TOKEN)
+        response = requests.get(MATERIAL_DATA_URL)
         response.raise_for_status()  # Raise HTTPError for bad responses
         data = pd.read_csv(io.StringIO(response.text))
         print("File loaded successfully. Columns:", data.columns)  # Debugging: Print column names
@@ -73,6 +73,28 @@ def item_overview(sku):
         }
 
     return render_template('item_overview.html', **item_data)
+
+@app.route('/static/item_overview', methods=["GET"])
+def serve_static_item_overview():
+    """
+    Redirects to the static 'item overview.html' hosted in Azure Blob Storage.
+    """
+    item_overview_url = f"{STATIC_FILE_URL}/item%20overview.html"
+    return redirect(item_overview_url, code=302)
+
+@app.route('/static/<path:filename>', methods=["GET"])
+def fetch_static_file(filename):
+    """
+    Fetch static files from Azure Blob Storage via proxy.
+    """
+    static_file_url = f"{STATIC_FILE_URL}/{filename}"
+    try:
+        response = requests.get(static_file_url)
+        response.raise_for_status()
+        return Response(response.content, status=response.status_code, content_type=response.headers['Content-Type'])
+    except Exception as e:
+        print(f"Error fetching static file '{filename}': {e}")
+        return jsonify({"error": f"Could not fetch the file '{filename}'."}), 500
 
 if __name__ == '__main__':
     # Use the PORT environment variable assigned by Azure

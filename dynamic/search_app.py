@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, redirect, Response
 from flask_cors import CORS
 import pandas as pd
 import os
@@ -15,9 +15,9 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Azure Blob Storage URL (use environment variables for sensitive data)
-MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
-SAS_TOKEN = os.getenv("SAS_TOKEN", "?se=2025-02-28T23%3A59%3A59Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=6gHA4BclcjFikr9Na3srpUA5RCvdX%2FyNAiJcdMhdEf0%3D")
+# Azure Blob Storage URLs
+MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
+STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html"
 
 # Cache for filtered data
 filtered_df = None
@@ -31,11 +31,8 @@ def fetch_material_data():
         pandas.DataFrame: Data loaded from the CSV file or an empty DataFrame if an error occurs.
     """
     try:
-        # Fetch data from the blob storage
-        response = requests.get(MATERIAL_DATA_URL + SAS_TOKEN)
+        response = requests.get(MATERIAL_DATA_URL)
         response.raise_for_status()  # Raise HTTPError for bad responses
-
-        # Convert CSV content to a pandas DataFrame
         data = pd.read_csv(io.StringIO(response.text))
         return data
     except Exception as e:
@@ -125,6 +122,30 @@ def export_data():
     except Exception as e:
         app.logger.error(f"Error exporting data: {e}")
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/", methods=["GET"])
+def serve_static_index():
+    """
+    Redirect to the search.html file in the Azure Blob Storage $web container.
+    """
+    search_file_url = f"{STATIC_FILE_URL}/search.html"
+    return redirect(search_file_url, code=302)
+
+
+@app.route("/static/<path:filename>", methods=["GET"])
+def fetch_static_file(filename):
+    """
+    Serve static files from Azure Blob Storage via proxy.
+    """
+    static_file_url = f"{STATIC_FILE_URL}/{filename}"
+    try:
+        response = requests.get(static_file_url)
+        response.raise_for_status()
+        return Response(response.content, status=response.status_code, content_type=response.headers['Content-Type'])
+    except Exception as e:
+        app.logger.error(f"Error fetching static file '{filename}': {e}")
+        return jsonify({"error": f"Could not fetch the file '{filename}'."}), 500
 
 
 if __name__ == "__main__":

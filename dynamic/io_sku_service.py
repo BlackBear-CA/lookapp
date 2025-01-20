@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, Response
 import pandas as pd
 import requests
 import io
@@ -6,16 +6,15 @@ import os
 
 app = Flask(__name__)
 
-# Azure Blob Storage URLs and SAS tokens are fetched from environment variables
-MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
-MATERIAL_SAS_TOKEN = os.getenv("MATERIAL_SAS_TOKEN", "?st=2025-01-16T08%3A11%3A49Z&se=2025-02-01T00%3A11%3A49Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=fmdlHhltCU4vNmLvnzPTbC0inmHLqO03pUW0U0AQrvE%3D")
-IMAGE_BASE_URL = os.getenv("IMAGE_BASE_URL", "https://cs210032003bbb220fc.blob.core.windows.net/image-product")
-IMAGE_SAS_TOKEN = os.getenv("IMAGE_SAS_TOKEN", "?sv=2023-08-03&se=2025-01-23T20%3A17%3A52Z&sr=c&sp=rwl&sig=f6OLpFNTdOMV5l5zRGWHSnu2phTP9odsIsPG9bDv1Gc%3D")
+# Azure Blob Storage URLs
+MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
+IMAGE_BASE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/image-product"
+STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web/item overview.html"
 
 # Helper function to fetch material data from Azure Blob Storage
 def fetch_material_data():
     try:
-        response = requests.get(MATERIAL_DATA_URL + MATERIAL_SAS_TOKEN)
+        response = requests.get(MATERIAL_DATA_URL)
         response.raise_for_status()
         return pd.read_csv(io.StringIO(response.text))
     except Exception as e:
@@ -50,7 +49,7 @@ def get_sku_details():
         }
 
         # Construct image URL
-        image_url = f"{IMAGE_BASE_URL}/{sku_id}.jpg{IMAGE_SAS_TOKEN}"
+        image_url = f"{IMAGE_BASE_URL}/{sku_id}.jpg"
         sku_details["image_url"] = image_url
 
         return jsonify(sku_details)
@@ -83,10 +82,32 @@ def item_overview():
         "mfg_part_nos": sku_data.iloc[0].get("mfg_part_nos", "N/A"),
         "item_main_category": sku_data.iloc[0].get("item_main_category", "N/A"),
         "item_sub_category": sku_data.iloc[0].get("item_sub_category", "N/A"),
-        "image_url": f"{IMAGE_BASE_URL}/{sku_id}.jpg{IMAGE_SAS_TOKEN}"
+        "image_url": f"{IMAGE_BASE_URL}/{sku_id}.jpg"
     }
 
     return render_template('item_overview.html', **item_data)
+
+@app.route('/static/item_overview', methods=['GET'])
+def serve_static_item_overview():
+    """
+    Redirect to the static 'item_overview.html' hosted in Azure Blob Storage.
+    """
+    item_overview_url = f"{STATIC_FILE_URL}/item%20overview.html"
+    return redirect(item_overview_url, code=302)
+
+@app.route('/static/<path:filename>', methods=['GET'])
+def fetch_static_file(filename):
+    """
+    Fetch static files from Azure Blob Storage via proxy.
+    """
+    static_file_url = f"{STATIC_FILE_URL}/{filename}"
+    try:
+        response = requests.get(static_file_url)
+        response.raise_for_status()
+        return Response(response.content, status=response.status_code, content_type=response.headers['Content-Type'])
+    except Exception as e:
+        print(f"Error fetching static file '{filename}': {e}")
+        return jsonify({"error": f"Could not fetch the file '{filename}'."}), 500
 
 if __name__ == '__main__':
     # Use the PORT environment variable assigned by Azure

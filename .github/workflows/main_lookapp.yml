@@ -41,11 +41,7 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
-          client-secret: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}
-          auth-type: SERVICE_PRINCIPAL
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Step 5: Deploy static files
       - name: Deploy static files

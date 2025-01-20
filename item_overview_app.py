@@ -2,12 +2,13 @@ import pandas as pd
 from flask import Flask, render_template
 import requests
 import io
+import os
 
 app = Flask(__name__)
 
 # Azure Blob Storage URL and SAS token for the new data source
-MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
-SAS_TOKEN = "?se=2025-02-28T23%3A59%3A59Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=6gHA4BclcjFikr9Na3srpUA5RCvdX%2FyNAiJcdMhdEf0%3D"
+MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
+SAS_TOKEN = os.getenv("SAS_TOKEN", "?se=2025-02-28T23%3A59%3A59Z&sp=r&spr=https&sv=2022-11-02&sr=b&sig=6gHA4BclcjFikr9Na3srpUA5RCvdX%2FyNAiJcdMhdEf0%3D")
 
 # Load material data from Azure Blob Storage
 def load_material_data():
@@ -74,4 +75,6 @@ def item_overview(sku):
     return render_template('item_overview.html', **item_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use the PORT environment variable assigned by Azure
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

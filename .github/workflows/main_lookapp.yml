@@ -1,8 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
-name: Build and deploy Python app to Azure Web App - lookapp
+name: Build and Deploy to Azure Web App - lookapp
 
 on:
   push:
@@ -10,69 +6,75 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      # Step 2: Set up Python environment
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Create and start virtual environment
+      - name: Create and activate virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      # Step 3: Run tests (optional)
+      # Uncomment the following section if you have tests to run
+      # - name: Run tests
+      #   run: pytest
 
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
+      # Step 4: Zip the application for deployment
+      - name: Package application
+        run: zip release.zip ./* -r -x "venv/*"
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: python-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
-      
+      # Step 5: Login to Azure
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9C78162B15764625B1ADD57E6F39D44A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F70F5E97B0284A01900AD67D4BFB205C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6DD16B6A34A74EBE92BF964FAFFF7CD9 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_264E190F46954F3FB12E12BE5D9F9B70 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B6A48E0380924A43A360AF80F427421A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_247B62E695784804A46D900278D9D0C8 }}
+          auth-type: "SERVICE_PRINCIPAL"
+          enable-AzPSSession: false
+          environment: azurecloud
+          audience: api://AzureADTokenExchange
 
-      - name: 'Deploy to Azure Web App'
+      # Step 6: Deploy static files
+      - name: Deploy static files
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'lookapp'
+          slot-name: 'Production'
+          package: './static'
+
+      # Step 7: Deploy backend code
+      - name: Deploy backend code
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'lookapp'
+          slot-name: 'Production'
+          package: './app'
+
+      # Step 8: Final deploy artifact to Azure Web App
+      - name: Deploy the app
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'lookapp'
           slot-name: 'Production'
-          
+          package: './release.zip'

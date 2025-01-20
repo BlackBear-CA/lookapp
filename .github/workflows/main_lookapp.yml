@@ -37,12 +37,31 @@ jobs:
       - name: Package application
         run: zip release.zip ./* -r -x "venv/*"
 
-      # Step 4: Debug Secrets
-      - name: Debug Secrets
+      # Step 4: Enhanced Debug Secrets
+      - name: Enhanced Debug Secrets
         run: |
-          echo "Client ID: $AZURE_CLIENT_ID"
-          echo "Tenant ID: $AZURE_TENANT_ID"
-          echo "Subscription ID: $AZURE_SUBSCRIPTION_ID"
+          echo "### DEBUGGING SECRETS ###"
+          echo "Checking if secrets are set..."
+          if [ -z "$AZURE_CLIENT_ID" ]; then
+            echo "ERROR: AZURE_CLIENT_ID is not set or is empty."
+          else
+            echo "AZURE_CLIENT_ID is set."
+          fi
+
+          if [ -z "$AZURE_TENANT_ID" ]; then
+            echo "ERROR: AZURE_TENANT_ID is not set or is empty."
+          else
+            echo "AZURE_TENANT_ID is set."
+          fi
+
+          if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
+            echo "ERROR: AZURE_SUBSCRIPTION_ID is not set or is empty."
+          else
+            echo "AZURE_SUBSCRIPTION_ID is set."
+          fi
+
+          echo "Environment variables:"
+          env | grep AZURE_
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}

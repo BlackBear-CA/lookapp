@@ -1,4 +1,4 @@
-name: Build and Deploy to Azure Web App - lookapp
+name: Build and Deploy Front-End to Azure Web App - lookapp
 
 on:
   push:
@@ -19,21 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
-      - name: Set up Python version
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Create and activate virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Step 3: Enhanced Debug Secrets
+      # Step 2: Enhanced Debug Secrets
       - name: Enhanced Debug Secrets
         run: |
           echo "### DEBUGGING SECRETS ###"
@@ -63,7 +49,7 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 4: Login to Azure using OIDC
+      # Step 3: Login to Azure
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -71,27 +57,10 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 5: Deploy static files (front-end)
+      # Step 4: Deploy static files (front-end)
       - name: Deploy Static Front-End
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'lookapp'
           slot-name: 'Production'
           package: './static'
-
-      # Step 6: Deploy backend code
-      - name: Deploy Backend Code
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'lookapp'
-          slot-name: 'Production'
-          package: './app'
-
-      # Step 7: Deploy the app zip
-      - name: Deploy Application Zip
-        uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
-        with:
-          app-name: 'lookapp'
-          slot-name: 'Production'
-          package: './release.zip'

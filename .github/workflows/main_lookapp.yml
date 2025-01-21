@@ -33,15 +33,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Step 3: Deploy static files (front-end)
-      - name: Deploy Static Front-End
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'lookapp'
-          slot-name: 'Production'
-          package: './static'
-
-      # Step 4: Debug Secrets
+      # Step 3: Enhanced Debug Secrets
       - name: Enhanced Debug Secrets
         run: |
           echo "### DEBUGGING SECRETS ###"
@@ -71,13 +63,21 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 5: Login to Azure using OIDC
+      # Step 4: Login to Azure using OIDC
       - name: Login to Azure
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Step 5: Deploy static files (front-end)
+      - name: Deploy Static Front-End
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'lookapp'
+          slot-name: 'Production'
+          package: './static'
 
       # Step 6: Deploy backend code
       - name: Deploy Backend Code

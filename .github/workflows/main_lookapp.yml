@@ -60,21 +60,20 @@ jobs:
       # Step 4: Prepare Static Content
       - name: Prepare Static Content
         run: |
-          echo "Ensuring static content structure for PHP stack..."
-          # Check if index.html exists
+          echo "Ensuring static content structure..."
           if [ ! -f "./static/index.html" ]; then
             echo "Error: index.html not found in static folder. Ensure the front-end entry point exists."
             exit 1
           fi
-          echo "Static content is valid and prepared:"
+          echo "Static content is valid:"
           ls -R ./static
 
-      # Step 5: Debug Zip File
-      - name: Debug Zip File
+      # Step 5: Create Zip for Deployment
+      - name: Create Deployment Package
         run: |
-          echo "Zipping static folder for deployment..."
+          echo "Creating zip package for deployment..."
           zip -r static.zip ./static
-          echo "Zip file contents:"
+          echo "Contents of the zip file:"
           unzip -l static.zip
 
       # Step 6: Deploy Static Front-End
@@ -83,4 +82,4 @@ jobs:
         with:
           app-name: 'lookapp'
           slot-name: 'Production'
-          package: './static'
+          package: './static.zip'

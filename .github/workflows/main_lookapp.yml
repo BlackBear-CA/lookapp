@@ -33,11 +33,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Step 3: Package the application for deployment
-      - name: Package application
-        run: zip release.zip ./* -r -x "venv/*"
+      # Step 3: Deploy static files (front-end)
+      - name: Deploy Static Front-End
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'lookapp'
+          slot-name: 'Production'
+          package: './static'
 
-      # Step 4: Enhanced Debug Secrets
+      # Step 4: Debug Secrets
       - name: Enhanced Debug Secrets
         run: |
           echo "### DEBUGGING SECRETS ###"
@@ -75,24 +79,16 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 6: Deploy static files
-      - name: Deploy static files
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'lookapp'
-          slot-name: 'Production'
-          package: './static'
-
-      # Step 7: Deploy backend code
-      - name: Deploy backend code
+      # Step 6: Deploy backend code
+      - name: Deploy Backend Code
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'lookapp'
           slot-name: 'Production'
           package: './app'
 
-      # Step 8: Deploy the app zip
-      - name: Deploy the app
+      # Step 7: Deploy the app zip
+      - name: Deploy Application Zip
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:

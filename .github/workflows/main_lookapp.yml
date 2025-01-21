@@ -57,7 +57,18 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 4: Deploy static files (front-end)
+      # Step 4: Ensure Static Content Packaging (Specific for PHP Hosting)
+      - name: Prepare Static Content
+        run: |
+          echo "Ensuring static content structure for PHP stack..."
+          # Copy index.html to the root if needed (adjust based on your app structure)
+          if [ ! -f "./static/index.html" ]; then
+            echo "Error: No index.html found in static folder. Ensure the front-end entry point exists."
+            exit 1
+          fi
+          ls -R ./static
+
+      # Step 5: Deploy static files (front-end)
       - name: Deploy Static Front-End
         uses: azure/webapps-deploy@v3
         with:

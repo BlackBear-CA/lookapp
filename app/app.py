@@ -16,12 +16,11 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 logging.basicConfig(level=logging.DEBUG)
 
 # Azure Blob Storage URLs
-MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
-STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html"
+MATERIAL_DATA_URL = os.getenv("MATERIAL_DATA_URL", "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv")
+STATIC_FILE_URL = os.getenv("STATIC_FILE_URL", "https://cs210032003bbb220fc.blob.core.windows.net/$web")
 
 # Cache for filtered data
 filtered_df = None
-
 
 def fetch_material_data():
     """
@@ -32,13 +31,12 @@ def fetch_material_data():
     """
     try:
         response = requests.get(MATERIAL_DATA_URL)
-        response.raise_for_status()  # Raise HTTPError for bad responses
+        response.raise_for_status()
         data = pd.read_csv(io.StringIO(response.text))
         return data
     except Exception as e:
         app.logger.error(f"Error fetching material data: {e}")
         return pd.DataFrame()
-
 
 @app.route("/search", methods=["GET"])
 def search_data():
@@ -99,7 +97,6 @@ def search_data():
         app.logger.error(f"Unexpected error during search: {e}")
         return jsonify({"error": str(e)}), 500
 
-
 @app.route("/export", methods=["GET"])
 def export_data():
     global filtered_df
@@ -123,21 +120,12 @@ def export_data():
         app.logger.error(f"Error exporting data: {e}")
         return jsonify({"error": str(e)}), 500
 
-
 @app.route("/", methods=["GET"])
 def serve_static_index():
-    """
-    Redirect to the search.html file in the Azure Blob Storage $web container.
-    """
-    search_file_url = f"{STATIC_FILE_URL}/search.html"
-    return redirect(search_file_url, code=302)
-
+    return redirect(f"{STATIC_FILE_URL}/search.html", code=302)
 
 @app.route("/static/<path:filename>", methods=["GET"])
 def fetch_static_file(filename):
-    """
-    Serve static files from Azure Blob Storage via proxy.
-    """
     static_file_url = f"{STATIC_FILE_URL}/{filename}"
     try:
         response = requests.get(static_file_url)
@@ -147,8 +135,6 @@ def fetch_static_file(filename):
         app.logger.error(f"Error fetching static file '{filename}': {e}")
         return jsonify({"error": f"Could not fetch the file '{filename}'."}), 500
 
-
 if __name__ == "__main__":
-    # Use port assigned by Azure
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

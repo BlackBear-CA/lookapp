@@ -57,15 +57,18 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Step 4: Ensure Static Content Packaging (Specific for PHP Hosting)
+      # Step 4: Prepare Static Content
       - name: Prepare Static Content
         run: |
           echo "Ensuring static content structure for PHP stack..."
-          # Copy index.html to the root if needed (adjust based on your app structure)
-          if [ ! -f "./static/index.html" ]; then
-            echo "Error: No index.html found in static folder. Ensure the front-end entry point exists."
+          # Check if home.html exists and copy it as index.html
+          if [ ! -f "./static/home.html" ]; then
+            echo "Error: home.html not found in static folder. Ensure the front-end entry point exists."
             exit 1
           fi
+          # Copy home.html to index.html for deployment
+          cp ./static/home.html ./static/index.html
+          echo "Static content is valid and prepared:"
           ls -R ./static
 
       # Step 5: Deploy static files (front-end)

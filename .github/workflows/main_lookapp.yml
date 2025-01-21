@@ -61,17 +61,23 @@ jobs:
       - name: Prepare Static Content
         run: |
           echo "Ensuring static content structure for PHP stack..."
-          # Check if home.html exists and copy it as index.html
-          if [ ! -f "./static/home.html" ]; then
-            echo "Error: home.html not found in static folder. Ensure the front-end entry point exists."
+          # Check if index.html exists
+          if [ ! -f "./static/index.html" ]; then
+            echo "Error: index.html not found in static folder. Ensure the front-end entry point exists."
             exit 1
           fi
-          # Copy home.html to index.html for deployment
-          cp ./static/home.html ./static/index.html
           echo "Static content is valid and prepared:"
           ls -R ./static
 
-      # Step 5: Deploy static files (front-end)
+      # Step 5: Debug Zip File
+      - name: Debug Zip File
+        run: |
+          echo "Zipping static folder for deployment..."
+          zip -r static.zip ./static
+          echo "Zip file contents:"
+          unzip -l static.zip
+
+      # Step 6: Deploy Static Front-End
       - name: Deploy Static Front-End
         uses: azure/webapps-deploy@v3
         with:

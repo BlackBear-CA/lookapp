@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookapp - Item Overview</title>
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Link to Header Styles -->
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/main header_style.css">
+    <!-- Link to Item Overview Styles -->
+    <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/item overview.css">
+     <!-- Link to SKU Details Styles -->
+     <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_skudetails.css">
+     <!-- Link to Planner Tab Styles -->
+     <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_tabs.css">
+     <!-- Link to SKU Feeds Styles -->
+     <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_skufeed.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/index.html"><h1>lookapp</h1></a>
+        </div>
+        <nav class="nav">
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/index.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_home.png" alt="Home Icon" class="nav-icon"> Home
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_search_24dp_UNDEFINED_FILL0_wght400_GRAD0_opsz24.svg" alt="Explore Icon" class="nav-icon"> Explore
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/submit request.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_quote-request.png" alt="Request Icon" class="nav-icon"> Submit a Request
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/subscribe to alerts.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_notification.png" alt="Alerts Icon" class="nav-icon"> Subscribe to Alerts
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/join community.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_network.png" alt="Community Icon" class="nav-icon"> Join the Community
+            </a>
+            <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/support.html">
+                <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_telephone.png" alt="Support Icon" class="nav-icon"> 24/7 support
+            </a>
+        </nav>
+    </header>
+    
+<!-- Item Search Container -->
+<section class="item-search-container">
+    <div class="search-wrapper">
+        <span class="search-icon">&#128269;</span> <!-- Unicode for magnifying glass -->
+        <input type="text" class="search-input" placeholder="Search your next item here" />
+        <button class="search-button">Search</button>
+    </div>
+</section>
+
+    <!-- Breadcrumbs Section -->
+    <div class="breadcrumbs">
+        <span>Item Overview</span>
+        <a href="https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html">{{ item_main_category }}</a> &gt;
+        <a href="explore.html?category={{ item_sub_category }}">{{ item_sub_category }}</a> &gt;
+        
+    </div>
+
+    <!-- Notifications and Requests Section -->
+<div class="action-links">
+    <!-- Notifications Link -->
+    <div class="notifications-link">
+        <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_notification.png" alt="Notification Icon" class="action-icon">
+        <span>Get notifications and alerts about this item.</span>
+    </div>
+
+    <!-- Request Link -->
+    <div class="request-link">
+        <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_quote-request.png" alt="Request Icon" class="action-icon">
+        <span>Do you have a request about this item?</span>
+    </div>
+</div>
+
+    <!-- Main Content Section -->
+    <main>
+
+        <section id="sku-details" class="section">
+            <h1><strong>SKU:</strong> <span id="sku-id">Loading SKU...</span></h1>
+            <p><strong>Item Description:</strong> <span id="item-description">Loading...</span></p>
+            <p><strong>Detailed Description:</strong> <span id="detailed-description">Loading...</span></p>
+            <p><strong>Manufacturer:</strong> <span id="manufacturer">Loading...</span></p>
+            <p><strong>MFG Part Nos:</strong> <span id="mfg-part-nos">Loading...</span></p>
+        </section>
+        
+
+
+ <!-- Image Reference Section -->
+<section class="image-reference">
+    <div class="image-container">
+        <div class="item-image">
+            <!-- The src dynamically retrieves the image using the sku_id -->
+            <img id="item-image" src="" alt="Item Image">
+        </div>
+    </div>
+
+</section>
+<!-- Barcode Section -->
+<section class="barcode-section">
+    <div class="barcode-container">
+        <img id="barcode-image" src="D:\lookapp-project\resources\images\barcodes\425b3920-6414-4805-b5c9-b9828e0c40ce.png.png" alt="Barcode Image">
+        <p id="barcode-text">425b3920-6414-4805-b5c9-b9828e0c40ce</p>
+    </div>
+</section>
+
+
+        <!-- Tabs Section -->
+<section class="tabs-container">
+    <div class="tabs">
+        <button class="tab-link material" data-modal="material-modal">Material</button>
+        <button class="tab-link inventory" data-modal="inventory-modal">Inventory</button>
+        <button class="tab-link purchasing" data-modal="purchasing-modal">Purchasing</button>
+        <button class="tab-link maintenance" data-modal="maintenance-modal">Maintenance</button>
+    </div>
+</section>
+
+<!-- Modals -->
+<div class="modal" id="material-modal">
+    <div class="modal-content">
+        <span class="close-btn" data-modal="material-modal">&times;</span>
+        <h2>Material Information</h2>
+        <p>Details about the material for this item...</p>
+    </div>
+</div>
+
+<div class="modal" id="inventory-modal">
+    <div class="modal-content">
+        <span class="close-btn" data-modal="inventory-modal">&times;</span>
+        <h2>Inventory Information</h2>
+        <p><strong>Client ID:</strong> <span id="client-id">Loading...</span></p>
+        <p><strong>Storage:</strong> <span id="storage">Loading...</span></p>
+        <p><strong>SKU:</strong> <span id="sku">Loading...</span></p>
+        <p><strong>Item Description:</strong> <span id="item-description">Loading...</span></p>
+        <p><strong>Stock Type:</strong> <span id="stock-type">Loading...</span></p>
+        <p><strong>MRP Type:</strong> <span id="mrp-type">Loading...</span></p>
+        <p><strong>ROP:</strong> <span id="rop">Loading...</span></p>
+        <p><strong>ROQ:</strong> <span id="roq">Loading...</span></p>
+        <p><strong>Moving Code:</strong> <span id="moving-code">Loading...</span></p>
+        <p><strong>Item Owner:</strong> <span id="item-owner">Loading...</span></p>
+    </div>
+</div>
+
+
+<div class="modal" id="purchasing-modal">
+    <div class="modal-content">
+        <span class="close-btn" data-modal="purchasing-modal">&times;</span>
+        <h2>Purchasing Information</h2>
+        <p>Details about the purchasing for this item...</p>
+    </div>
+</div>
+
+<div class="modal" id="maintenance-modal">
+    <div class="modal-content">
+        <span class="close-btn" data-modal="maintenance-modal">&times;</span>
+        <h2>Maintenance Information</h2>
+        <p>Details about the maintenance for this item...</p>
+    </div>
+</div>
+
+ <!-- Quantity Details -->
+<section class="stock-details">
+    <div class="status-container">
+        <!-- Stock on Hand -->
+        <div class="status-box">
+            <span id="stock-on-hand"></span>
+            <p>Stock on Hand<br><span id="storage-bin"></span></p>
+        </div>
+        <!-- In-Transit -->
+        <div class="status-box">
+            <span id="in-transit"></span>
+            <p>In-Transit<br>Loc: <span id="shipment-loc"></span></p>
+        </div>
+        <!-- Reserved -->
+        <div class="status-box">
+            <span id="reserved"></span>
+            <p>Reserved<br>Req Date: <span id="requirement-date"></span></p>
+        </div>
+        <!-- On-Purchase -->
+        <div class="status-box">
+            <span id="on-purchase"></span>
+            <p>On-Purchase<br>Est Del: <span id="delivery-date"></span></p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Latest SKU Feeds Section -->
+<section class="latest-sku-feeds">
+    <h3>Latest SKU Feeds:</h3>
+    <div class="sku-feed-container">
+        <div class="sku-feed">
+            <p class="alert-text">
+                <strong>Jan 13, 2025</strong> - Delivery Date on <strong>P10010011</strong> has been changed to <strong>Feb 15, 2025</strong>
+                <span class="alert-icon">
+                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_truck-delivery transactions.png" alt="Delivery Icon">
+                </span>
+            </p>
+        </div>
+        <div class="sku-feed">
+            <p class="alert-text">
+                <strong>Jan 10, 2025</strong> - A transaction type: <strong>physical inventory adjustment</strong> has occurred.
+                <span class="alert-icon">
+                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_moneycut.png" alt="Delivery Icon">
+                </span>
+            </p>
+        </div>
+        <!-- Add more feeds as needed -->
+    </div> 
+    <div class="scroll-buttons">
+        <button class="scroll-up">Scroll Up</button>
+        <button class="scroll-down">Scroll Down</button>
+    </div>
+</section>
+
+    </main>
+    <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_tabs.js"></script>
+    <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_skufeed.js"></script>
+    <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_handler.js" defer></script>
+
+</body>
+</html>

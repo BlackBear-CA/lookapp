@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Azure Blob Storage URLs
 MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
-STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web/search.html"
+STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web"
 
 # Load material data from Azure Blob Storage
 def load_material_data():
@@ -39,11 +39,15 @@ def item_overview(sku):
     # Debugging: Print available columns
     print("Available columns in data:", data.columns)
 
+    # Validate SKU column
+    if "sku_id" not in data.columns:
+        return f"Error: 'sku_id' column not found in data. Available columns: {data.columns}", 500
+
     # Find the row corresponding to the SKU
     try:
         item = data.loc[data['sku_id'] == int(sku)]  # Adjust 'sku_id' to match your CSV column name
     except KeyError as e:
-        print(f"Error: Column not found - {e}")
+        print(f"Error: Column not found - {e}, Requested SKU: {sku}")
         return f"Error: Column 'sku_id' not found in data. Available columns: {data.columns}", 500
 
     # If item is found
@@ -56,7 +60,7 @@ def item_overview(sku):
             'mfg_part_nos': item.iloc[0]['mfg_part_nos'],
             'item_main_category': item.iloc[0]['item_main_category'],
             'item_sub_category': item.iloc[0]['item_sub_category'],
-            'image_file_name': "SPEMGS4-004-S.jpg"  # This should match the file name in your folder
+            'image_file_name': f"{sku}.jpg"  # Dynamic image file name
         }
     else:
         # Handle item not found
@@ -98,5 +102,5 @@ def fetch_static_file(filename):
 
 if __name__ == '__main__':
     # Use the PORT environment variable assigned by Azure
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=5001)
+    port = int(os.getenv("PORT", 5001))  # Default to 5001
+    app.run(host="0.0.0.0", port=port)

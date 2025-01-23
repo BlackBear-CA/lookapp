@@ -111,5 +111,5 @@ def fetch_static_file(filename):
 
 if __name__ == '__main__':
     # Use the PORT environment variable assigned by Azure
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=5002)
+    port = int(os.getenv("PORT", 5002))
+    app.run(host="0.0.0.0", port=port)

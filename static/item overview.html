@@ -51,15 +51,19 @@
     <div class="search-wrapper">
         <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_menu_24dp_UNDEFINED_FILL0_wght400_GRAD0_opsz24.svg" 
              alt="Search Menu Icon" 
-             class="search-menu-icon" />
-        <select class="search-type">
-            <option value="sku">Search by SKU</option>
-            <option value="keyword">Search by Other</option>
-        </select>
+             class="search-menu-icon" 
+             id="menu-button" />
+        <div class="dropdown-container" id="dropdown-container">
+            <ul class="dropdown-menu">
+                <li class="dropdown-item" data-type="sku">Search by SKU</li>
+                <li class="dropdown-item" data-type="keyword">Search by Keyword</li>
+            </ul>
+        </div>
         <input type="text" class="search-input" placeholder="Search your next item here" />
         <button class="search-button">Search</button>
     </div>
 </section>
+
 
     <!-- Breadcrumbs Section -->
     <div class="breadcrumbs">

@@ -16,11 +16,11 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 logging.basicConfig(level=logging.DEBUG)
 
 # Azure Blob Storage URLs
-MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/material_data.csv"
-WAREHOUSE_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/warehouse_data.csv"
-LOGISTICS_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/logistics_data.csv"
-REQ_INTERNAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/req_internal_data.csv"
-P2P_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/p2p_data.csv"
+MATERIAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/materialBasicData.csv"
+WAREHOUSE_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/warehouseData.csv"
+LOGISTICS_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/stockLogisticsData.csv"
+REQ_INTERNAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/reservationData.csv"
+P2P_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/purchaseRecords.csv"
 BARCODES_CSV_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/barcodes.csv"
 IMAGE_BASE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/barcodes"
 STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web"

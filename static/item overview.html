@@ -14,8 +14,8 @@
      <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_skudetails.css">
      <!-- Link to Planner Tab Styles -->
      <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_tabs.css">
-     <!-- Link to SKU Feeds Styles -->
-     <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/overview_skufeed.css">
+     <!-- Link to Material Reference Styles -->
+     <link rel="stylesheet" href="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewMatRef.css">
 </head>
 <body>
 
@@ -198,33 +198,28 @@
     </div>
 </section>
 
-<!-- Latest SKU Feeds Section -->
-<section class="latest-sku-feeds">
-    <h3>Latest SKU Feeds:</h3>
-    <div class="sku-feed-container">
-        <div class="sku-feed">
-            <p class="alert-text">
-                <strong>Jan 13, 2025</strong> - Delivery Date on <strong>P10010011</strong> has been changed to <strong>Feb 15, 2025</strong>
-                <span class="alert-icon">
-                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_truck-delivery transactions.png" alt="Delivery Icon">
-                </span>
-            </p>
-        </div>
-        <div class="sku-feed">
-            <p class="alert-text">
-                <strong>Jan 10, 2025</strong> - A transaction type: <strong>physical inventory adjustment</strong> has occurred.
-                <span class="alert-icon">
-                    <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_moneycut.png" alt="Delivery Icon">
-                </span>
-            </p>
-        </div>
-        <!-- Add more feeds as needed -->
-    </div> 
-    <div class="scroll-buttons">
-        <button class="scroll-up">Scroll Up</button>
-        <button class="scroll-down">Scroll Down</button>
+<!-- Material Reference Section -->
+<section class="material-reference-section">
+    <h3>Material Reference:</h3>
+    
+    <!-- Notes Section -->
+    <div class="material-notes">
+        <h4>Notes:</h4>
+        <textarea id="material-notes" placeholder="Add your notes about this material..." rows="4" cols="50"></textarea>
+        <button id="save-notes" class="btn-save">Save Notes</button>
+        <p id="notes-feedback" class="feedback-message" style="display: none;">Notes saved successfully!</p>
+    </div>
+
+    <!-- Links Section -->
+    <div class="material-links">
+        <h4>Reference Links:</h4>
+        <ul id="dynamic-links">
+            <!-- Links will be dynamically inserted here via JavaScript -->
+        </ul>
+        <p id="no-links-message" style="display: none; color: #666;">No reference links available for this material.</p>
     </div>
 </section>
+
 
     </main>
     <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewTabs.js"></script>

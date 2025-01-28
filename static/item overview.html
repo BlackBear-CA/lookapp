@@ -205,9 +205,15 @@
     <!-- Notes Section -->
     <div class="material-notes">
         <h4>Notes:</h4>
-        <textarea id="material-notes" placeholder="Add your notes about this material..." rows="4" cols="50"></textarea>
-        <button id="save-notes" class="btn-save">Save Notes</button>
-        <p id="notes-feedback" class="feedback-message" style="display: none;">Notes saved successfully!</p>
+        <textarea 
+            id="material-notes" 
+            placeholder="Loading material notes..." 
+            rows="4" 
+            cols="50" 
+            readonly>
+        </textarea>
+        <p id="notes-feedback" class="feedback-message" style="display: none;">Notes loaded successfully!</p>
+        <p id="notes-error" class="feedback-message error" style="display: none;">Failed to load notes.</p>
     </div>
 
     <!-- Links Section -->
@@ -215,15 +221,14 @@
         <h4>Reference Links:</h4>
         <ul id="dynamic-links">
             <!-- Links will be dynamically inserted here via JavaScript -->
+            <li class="loading-message">Loading links...</li>
         </ul>
         <p id="no-links-message" style="display: none; color: #666;">No reference links available for this material.</p>
     </div>
 </section>
 
-
     </main>
     <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewTabs.js"></script>
-    <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewSkuFeed.js"></script>
     <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewHandler.js" defer></script>
     <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewSearch.js" defer></script>
     <script src="https://cs210032003bbb220fc.blob.core.windows.net/$web/itemOverviewPrintBarcode.js" defer></script>

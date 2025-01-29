@@ -22,6 +22,8 @@ LOGISTICS_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets
 REQ_INTERNAL_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/reservationData.csv"
 P2P_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/purchaseRecords.csv"
 BARCODES_CSV_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/barcodes.csv"
+MRP_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/mrpData.csv"
+REFERENCE_LINKS_URL = "https://cs210032003bbb220fc.blob.core.windows.net/reference-links"
 IMAGE_BASE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/barcodes"
 STATIC_FILE_URL = "https://cs210032003bbb220fc.blob.core.windows.net/$web"
 
@@ -229,6 +231,48 @@ def get_quantity_details():
         return jsonify(quantity_details)
     except Exception as e:
         app.logger.error(f"Error processing quantity details: {e}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
+
+# Route: Get Material Notes
+@app.route("/get_material_notes", methods=["GET"])
+def get_material_notes():
+    sku_id = request.args.get("sku_id")
+    if not sku_id:
+        return jsonify({"error": "SKU ID is required"}), 400
+
+    try:
+        mrp_data = fetch_data(MRP_DATA_URL)
+        if mrp_data.empty:
+            return jsonify({"error": "MRP data could not be loaded"}), 500
+
+        memo_column = "materialMemo"
+        if memo_column not in mrp_data.columns:
+            return jsonify({"error": "materialMemo column missing in MRP data"}), 500
+
+        memo_row = mrp_data.loc[mrp_data["sku_id"] == int(sku_id), memo_column]
+        material_memo = memo_row.iloc[0] if not memo_row.empty else "No notes available."
+
+        return jsonify({"material_memo": material_memo})
+    except Exception as e:
+        app.logger.error(f"Error fetching material notes: {e}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
+
+# Route: Get Reference Links
+@app.route("/get_reference_links", methods=["GET"])
+def get_reference_links():
+    sku_id = request.args.get("sku_id")
+    if not sku_id:
+        return jsonify({"error": "SKU ID is required"}), 400
+
+    reference_link = f"{REFERENCE_LINKS_URL}/{sku_id}.pdf"
+    try:
+        response = requests.head(reference_link)
+        if response.status_code == 200:
+            return jsonify({"reference_link": reference_link})
+        else:
+            return jsonify({"error": "No reference document available for this SKU."}), 404
+    except Exception as e:
+        app.logger.error(f"Error fetching reference link: {e}")
         return jsonify({"error": "An unexpected error occurred"}), 500
 
 # Route: Static File Redirection

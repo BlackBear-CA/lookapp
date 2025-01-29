@@ -241,16 +241,34 @@ def get_material_notes():
         return jsonify({"error": "SKU ID is required"}), 400
 
     try:
+        MRP_DATA_URL = "https://cs210032003bbb220fc.blob.core.windows.net/datasets/mrpData.csv"
         mrp_data = fetch_data(MRP_DATA_URL)
+
         if mrp_data.empty:
             return jsonify({"error": "MRP data could not be loaded"}), 500
 
-        memo_column = "materialMemo"
-        if memo_column not in mrp_data.columns:
-            return jsonify({"error": "materialMemo column missing in MRP data"}), 500
+        # Ensure column names are stripped of any trailing spaces
+        mrp_data.columns = mrp_data.columns.str.strip()
 
-        memo_row = mrp_data.loc[mrp_data["sku_id"] == int(sku_id), memo_column]
-        material_memo = memo_row.iloc[0] if not memo_row.empty else "No notes available."
+        memo_column = "materialMemo"
+
+        if memo_column not in mrp_data.columns:
+            available_columns = ", ".join(mrp_data.columns)
+            app.logger.error(f"Column '{memo_column}' not found. Available columns: {available_columns}")
+            return jsonify({"error": f"Column '{memo_column}' not found in dataset."}), 500
+
+        # Convert SKU ID to integer and fetch memo
+        try:
+            sku_id = int(sku_id)
+        except ValueError:
+            return jsonify({"error": "Invalid SKU ID format"}), 400
+
+        memo_row = mrp_data.loc[mrp_data["sku_id"] == sku_id, memo_column]
+
+        if memo_row.empty:
+            return jsonify({"material_memo": "No notes available."}), 200
+
+        material_memo = memo_row.iloc[0]
 
         return jsonify({"material_memo": material_memo})
     except Exception as e:

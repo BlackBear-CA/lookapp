@@ -247,30 +247,29 @@ def get_material_notes():
         if mrp_data.empty:
             return jsonify({"error": "MRP data could not be loaded"}), 500
 
-        # Ensure column names are stripped of any trailing spaces
+        # Ensure column names are stripped of any trailing spaces and lowercase
         mrp_data.columns = mrp_data.columns.str.strip()
 
-        memo_column = "materialMemo"
+        required_columns = ["sku_id", "materialMemo"]
+        missing_columns = [col for col in required_columns if col not in mrp_data.columns]
 
-        if memo_column not in mrp_data.columns:
+        if missing_columns:
             available_columns = ", ".join(mrp_data.columns)
-            app.logger.error(f"Column '{memo_column}' not found. Available columns: {available_columns}")
-            return jsonify({"error": f"Column '{memo_column}' not found in dataset."}), 500
+            app.logger.error(f"Missing columns: {missing_columns}. Available columns: {available_columns}")
+            return jsonify({"error": f"Missing required columns: {', '.join(missing_columns)}"}), 500
 
-        # Convert SKU ID to integer and fetch memo
-        try:
-            sku_id = int(sku_id)
-        except ValueError:
-            return jsonify({"error": "Invalid SKU ID format"}), 400
+        # Convert SKU ID column to string for matching consistency
+        mrp_data["sku_id"] = mrp_data["sku_id"].astype(str)
 
-        memo_row = mrp_data.loc[mrp_data["sku_id"] == sku_id, memo_column]
+        # Fetch the material memo for the given SKU ID
+        memo_row = mrp_data.loc[mrp_data["sku_id"] == str(sku_id), "materialMemo"]
 
         if memo_row.empty:
-            return jsonify({"material_memo": "No notes available."}), 200
+            return jsonify({"sku_id": sku_id, "material_memo": "No notes available."}), 200
 
         material_memo = memo_row.iloc[0]
 
-        return jsonify({"material_memo": material_memo})
+        return jsonify({"sku_id": sku_id, "material_memo": material_memo})
     except Exception as e:
         app.logger.error(f"Error fetching material notes: {e}")
         return jsonify({"error": "An unexpected error occurred"}), 500

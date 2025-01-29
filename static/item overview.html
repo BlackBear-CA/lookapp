@@ -88,9 +88,14 @@
     </a>
 </div>
 
-    <!-- Main Content Section -->
-    <main>
+<!-- Main Content Section -->
+<main>
+    <!-- Left or center content, if any, goes outside #right-panel -->
 
+    <!-- Wrapper for the three sections on the right -->
+    <div id="right-panel">
+        
+        <!-- SKU Details -->
         <section id="sku-details" class="section">
             <h1><strong>SKU:</strong> <span id="sku-id">Loading SKU...</span></h1>
             <p><strong>Item Description:</strong> <span id="item-description">Loading...</span></p>
@@ -109,7 +114,48 @@
                     <!-- Rows will be dynamically inserted here -->
                 </tbody>
             </table>
-        </section>        
+        </section> 
+        
+        <!-- Barcode Section -->
+        <section class="barcode-section">
+            <div class="barcode-container">
+                <img id="barcode-image" src="" alt="Barcode Image">
+                <p id="barcode-text"></p>
+                <img id="printer-icon" 
+                     src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_printer.png" 
+                     alt="Print Barcode" 
+                     title="Print Barcode">
+            </div>
+        </section>
+
+        <!-- Quantity Details -->
+        <section class="stock-details">
+            <div class="status-container">
+                <!-- Stock on Hand -->
+                <div class="status-box">
+                    <span class="stock-on-hand"></span>
+                    <p>Stock on Hand<br><span class="storage-bin"></span></p>
+                </div>
+                <!-- In-Transit -->
+                <div class="status-box">
+                    <span class="in-transit"></span>
+                    <p>In-Transit<br><span class="shipment-loc"></span></p>
+                </div>
+                <!-- Reserved -->
+                <div class="status-box">
+                    <span class="reserved"></span>
+                    <p>Reserved<br><span class="requirement-date"></span></p>
+                </div>
+                <!-- On-Purchase -->
+                <div class="status-box">
+                    <span class="on-purchase"></span>
+                    <p>On-Purchase<br><span class="delivery-date"></span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
 
  <!-- Image Reference Section -->
 <section class="image-reference">
@@ -122,17 +168,8 @@
 
 </section>
 
-<!-- Barcode Section -->
-<section class="barcode-section">
-    <div class="barcode-container">
-        <img id="barcode-image" src="" alt="Barcode Image">
-        <p id="barcode-text"></p>
-        <img id="printer-icon" src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_printer.png" alt="Print Barcode" title="Print Barcode">
-    </div>
-</section>
 
-
-        <!-- Tabs Section -->
+<!-- Tabs Section -->
 <section class="tabs-container">
     <div class="tabs">
         <button class="tab-link material" data-modal="material-modal">Material</button>
@@ -184,31 +221,7 @@
     </div>
 </div>
 
- <!-- Quantity Details -->
- <section class="stock-details">
-    <div class="status-container">
-        <!-- Stock on Hand -->
-        <div class="status-box">
-            <span class="stock-on-hand"></span>
-            <p>Stock on Hand<br><span class="storage-bin"></span></p>
-        </div>
-        <!-- In-Transit -->
-        <div class="status-box">
-            <span class="in-transit"></span>
-            <p>In-Transit<br><span class="shipment-loc"></span></p>
-        </div>
-        <!-- Reserved -->
-        <div class="status-box">
-            <span class="reserved"></span>
-            <p>Reserved<br><span class="requirement-date"></span></p>
-        </div>
-        <!-- On-Purchase -->
-        <div class="status-box">
-            <span class="on-purchase"></span>
-            <p>On-Purchase<br><span class="delivery-date"></span></p>
-        </div>
-    </div>
-</section>
+
 
 <!-- Material Reference Section -->
 <section class="material-reference-section">

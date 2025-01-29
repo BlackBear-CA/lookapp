@@ -162,12 +162,16 @@ def get_sku_details():
         if sku_data.empty:
             return jsonify({"error": f"SKU {sku_id} not found"}), 404
 
+        # ✅ Extract manufacturers and part numbers as a list instead of a single value
+        manufacturers = sku_data["manufacturer"].dropna().unique().tolist()
+        mfg_part_nos = sku_data["mfg_part_nos"].dropna().unique().tolist()
+
         sku_details = {
             "sku_id": sku_id,
             "item_description": sku_data.iloc[0].get("item_description", "N/A"),
             "detailed_description": sku_data.iloc[0].get("detailed_description", "N/A"),
-            "manufacturer": sku_data.iloc[0].get("manufacturer", "N/A"),
-            "mfg_part_nos": sku_data.iloc[0].get("mfg_part_nos", "N/A"),
+            "manufacturers": manufacturers,   # ✅ Return as a list
+            "mfg_part_nos": mfg_part_nos,     # ✅ Return as a list
             "item_main_category": sku_data.iloc[0].get("item_main_category", "N/A"),
             "item_sub_category": sku_data.iloc[0].get("item_sub_category", "N/A"),
             "image_url": f"{IMAGE_BASE_URL}/{sku_id}.jpg",

@@ -85,6 +85,40 @@
     <div class="sku-container">
         <div class="sku-text">
             <h1><strong>SKU:</strong> <span id="sku-id">Loading SKU...</span></h1>
+        </div>
+        <div class="action-icons">
+            <!-- Existing icons keep their original onclick behavior -->
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_addEnvelope.png" 
+                 alt="Add Envelope" title="Add to Envelope"
+                 onclick="redirectTo('https://forms.microsoft.com/example1')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_decrease.png" 
+                 alt="Decrease" title="Decrease Quantity"
+                 onclick="redirectTo('https://forms.microsoft.com/example2')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_increase.png" 
+                 alt="Increase" title="Increase Quantity"
+                 onclick="redirectTo('https://forms.microsoft.com/example3')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_report.png" 
+                 alt="Report" title="Report an Issue"
+                 onclick="redirectTo('https://forms.microsoft.com/example4')">
+                 
+            <!-- Subscribe icon calls a custom function instead of redirecting to a form -->
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_subscribe.png" 
+                 alt="Subscribe" title="Subscribe for Updates"
+                 onclick="subscribeToAlerts()">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_disposal.png" 
+                 alt="Disposal" title="Submit a Disposal Request"
+                 onclick="redirectTo('https://forms.microsoft.com/example6')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_rush.png" 
+                 alt="Rush" title="Submit a Logistics Rush Request"
+                 onclick="redirectTo('https://forms.microsoft.com/example7')">
+        </div>
+    </div>
+
     <p><strong>Item Description:</strong> <span id="item-description">Loading...</span></p>
     <p><strong>Detailed Description:</strong> <span id="detailed-description">Loading...</span></p>
 

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lookapp - Item Overview</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <!-- Link to Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Poppins:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Link to Header Styles -->
@@ -82,31 +80,44 @@
     <!-- Wrapper for the three sections on the right -->
     <div id="right-panel">
         
-<!-- SKU Details -->
+ <!-- SKU Details -->
 <section id="sku-details" class="section">
     <div class="sku-container">
         <div class="sku-text">
             <h1><strong>SKU:</strong> <span id="sku-id">Loading SKU...</span></h1>
         </div>
         <div class="action-icons">
-            <!-- Existing icons converted to Material Icons while keeping onclick behavior -->
-            <span class="material-icons" title="Add to Envelope" onclick="redirectTo('https://forms.microsoft.com/example1')">mail</span>
-            
-            <span class="material-icons" title="Decrease Quantity" onclick="redirectTo('https://forms.microsoft.com/example2')">remove_circle</span>
-            
-            <span class="material-icons" title="Increase Quantity" onclick="redirectTo('https://forms.microsoft.com/example3')">add_circle</span>
-            
-            <span class="material-icons" title="Report an Issue" onclick="redirectTo('https://forms.microsoft.com/example4')">report_problem</span>
-            
+            <!-- Existing icons keep their original onclick behavior -->
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_addEnvelope.png" 
+                 alt="Add Envelope" title="Add to Envelope"
+                 onclick="redirectTo('https://forms.microsoft.com/example1')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_decrease.png" 
+                 alt="Decrease" title="Decrease Quantity"
+                 onclick="redirectTo('https://forms.microsoft.com/example2')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_increase.png" 
+                 alt="Increase" title="Increase Quantity"
+                 onclick="redirectTo('https://forms.microsoft.com/example3')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_report.png" 
+                 alt="Report" title="Report an Issue"
+                 onclick="redirectTo('https://forms.microsoft.com/example4')">
+                 
             <!-- Subscribe icon calls a custom function instead of redirecting to a form -->
-            <span class="material-icons" title="Subscribe for Updates" onclick="subscribeToAlerts()">notifications_active</span>
-            
-            <span class="material-icons" title="Submit a Disposal Request" onclick="redirectTo('https://forms.microsoft.com/example6')">delete</span>
-            
-            <span class="material-icons" title="Submit a Logistics Rush Request" onclick="redirectTo('https://forms.microsoft.com/example7')">local_shipping</span>
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_subscribe.png" 
+                 alt="Subscribe" title="Subscribe for Updates"
+                 onclick="subscribeToAlerts()">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_disposal.png" 
+                 alt="Disposal" title="Submit a Disposal Request"
+                 onclick="redirectTo('https://forms.microsoft.com/example6')">
+                 
+            <img src="https://cs210032003bbb220fc.blob.core.windows.net/$web/icon_rush.png" 
+                 alt="Rush" title="Submit a Logistics Rush Request"
+                 onclick="redirectTo('https://forms.microsoft.com/example7')">
         </div>
     </div>
-</section>
 
     <p><strong>Item Description:</strong> <span id="item-description">Loading...</span></p>
     <p><strong>Detailed Description:</strong> <span id="detailed-description">Loading...</span></p>
